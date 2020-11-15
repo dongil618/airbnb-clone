@@ -62,7 +62,7 @@ class RoomAdmin(admin.ModelAdmin):
 
     filter_horizontal = ("amenities", "facilities", "house_rules")
 
-    def count_amenities(self, obj):
+    def count_amenities(self, obj):  # object는 객실임.
         return obj.amenities.count()
 
 
