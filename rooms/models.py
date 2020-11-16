@@ -56,8 +56,7 @@ class Photo(core_models.TimeStampedModel):
     caption = models.CharField(max_length=80)
     # upload_to는 uploads폴더안의 어떤 폴더에다가 photo를 업로드할 것인지.. => uploads/room_photos안에 파일이 저장됨.
     file = models.ImageField(upload_to="room_photos")
-    room = models.ForeignKey(
-        "Room", related_name="photos", on_delete=models.CASCADE)
+    room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.caption
@@ -86,12 +85,9 @@ class Room(core_models.TimeStampedModel):
     room_type = models.ForeignKey(
         "RoomType", related_name="rooms", on_delete=models.SET_NULL, null=True
     )
-    amenities = models.ManyToManyField(
-        "Amenity", related_name="rooms", blank=True)
-    facilities = models.ManyToManyField(
-        "Facility", related_name="rooms", blank=True)
-    house_rules = models.ManyToManyField(
-        "HouseRule", related_name="rooms", blank=True)
+    amenities = models.ManyToManyField("Amenity", related_name="rooms", blank=True)
+    facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
+    house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 
     def __str__(self):
         return self.name
@@ -103,6 +99,8 @@ class Room(core_models.TimeStampedModel):
     def total_rating(self):
         all_reviews = self.reviews.all()
         all_ratings = 0
-        for review in all_reviews:
-            all_ratings += review.rating_average()
-        return all_ratings / len(all_reviews)
+        if len(all_reviews) > 0:
+            for review in all_reviews:
+                all_ratings += review.rating_average()
+            return all_ratings / len(all_reviews)
+        return 0
