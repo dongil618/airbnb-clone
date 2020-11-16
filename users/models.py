@@ -30,7 +30,7 @@ class User(AbstractUser):
     CURRENCY_CHOICES = ((CURRENCY_USD, "USD"), (CURRENCY_USD, "KRW"))
 
     # null은 데이터베이스에서 사용되고 blank라는 것을 따로 지정해줘야 admin패널에서도 필수입력 특성을 해제시킬 수 있음.
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     gender = models.CharField(choices=GENDER_CHOICES,
                               max_length=10, blank=True)
     bio = models.TextField(blank=True)
