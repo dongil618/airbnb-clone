@@ -9,6 +9,8 @@ Log In
 
 {% block content %}
 
+{% include 'partials/social_login.html' %}
+
 <form method="POST" action="{% url "users:login" %}">
     {% csrf_token %}
     <!-- 로그인 보안을 위한 것. 위 토큰은 기본적으로 post request가 이 웹사이트에서 확인하는 용도 -->
