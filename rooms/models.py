@@ -1,10 +1,11 @@
+from django.utils import timezone
 from django.db import models
-from django.urls import reverse  # 절대경로 쉽게하기 위한 Django 라이브러리
+from django.urls import reverse
 from django_countries.fields import CountryField
 from core import models as core_models
+from cal import Calendar
 
 
-# AbstractItem은 name만을 위한 item. AbstractItem을 만든 이유는 우린 RoomType이 필요하고 Amenity Types도 필요하고..
 class AbstractItem(core_models.TimeStampedModel):
 
     """ Abstract Item """
@@ -38,6 +39,8 @@ class Facility(AbstractItem):
 
     """ Facility Model Definition """
 
+    pass
+
     class Meta:
         verbose_name_plural = "Facilities"
 
@@ -55,7 +58,6 @@ class Photo(core_models.TimeStampedModel):
     """ Photo Model Definition """
 
     caption = models.CharField(max_length=80)
-    # upload_to는 uploads폴더안의 어떤 폴더에다가 photo를 업로드할 것인지.. => uploads/room_photos안에 파일이 저장됨.
     file = models.ImageField(upload_to="room_photos")
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
@@ -119,3 +121,14 @@ class Room(core_models.TimeStampedModel):
     def get_next_four_photos(self):
         photos = self.photos.all()[1:5]
         return photos
+
+    def get_calendars(self):
+        now = timezone.now()
+        this_year = now.year
+        this_month = now.month
+        next_month = this_month + 1
+        if this_month == 12:
+            next_month = 1
+        this_month_cal = Calendar(this_year, this_month)
+        next_month_cal = Calendar(this_year, next_month)
+        return [this_month_cal, next_month_cal]

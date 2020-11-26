@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.views.generic import ListView, DetailView, View, UpdateView, FormView
 from django.shortcuts import render, redirect, reverse
 from django.core.paginator import Paginator
@@ -105,7 +106,6 @@ class SearchView(View):
         else:
             form = forms.SearchForm()
 
-        print(form.as_p)
         return render(request, "rooms/search.html", {"form": form})
 
 
