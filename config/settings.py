@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET")
+SECRET_KEY = "hu_=1($cl&gyvg3cdiovd8s6v31@y9i7=@(o4$i*l0_96t$qup"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -147,8 +147,12 @@ MEDIA_URL = "/media/"
 
 EMAIL_HOST = "smtp.mailgun.org"
 EMAIL_PORT = "587"
-EMAIL_HOST_USER = os.environ.get("MAILGUN_USERNAME")
-EMAIL_HOST_PASSWORD = os.environ.get("MAILGUN_PASSWORD")
+EMAIL_HOST_USER = os.environ.get(
+    "airbnb@sandbox9cc19bd7bc7a4ee6a3835798e2477fd2.mailgun.org"
+)
+EMAIL_HOST_PASSWORD = os.environ.get(
+    "e83b3d1d4462d4814b2bb87cde1b35d1-360a0b2c-08f8512b"
+)
 EMAIL_FROM = "sexy-guy@sandbox2ba559537f904296851b8b1b0c8d7d24.mailgun.org"
 
 
@@ -159,3 +163,5 @@ LOGIN_URL = "/users/login/"
 # Locale
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
+
+# AWS
