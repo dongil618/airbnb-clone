@@ -165,3 +165,4 @@ LOGIN_URL = "/users/login/"
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 # AWS
+# AWS1
