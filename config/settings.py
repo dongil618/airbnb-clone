@@ -166,3 +166,4 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 # AWS
 # AWS1
+# AWS2
